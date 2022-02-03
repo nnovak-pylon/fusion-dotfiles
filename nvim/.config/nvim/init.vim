@@ -32,6 +32,11 @@ let g:go_highlight_operators = 1
 
 let g:go_auto_type_info = 1
 
+" UltiSnips keybindings
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " Disable the scroll sync in the preview
 let g:mkdp_preview_options = {
     \ 'disable_sync_scroll': 1,
