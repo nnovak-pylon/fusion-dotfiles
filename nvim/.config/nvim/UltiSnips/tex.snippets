@@ -1,0 +1,54 @@
+snippet article "WriteArticle"
+\documentclass{article}
+
+\title{$1}
+\date{$2}
+\author{Nicholas Novak}
+
+\begin{document}
+\maketitle
+
+$3
+
+\end{document}
+endsnippet
+
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet
+
+snippet beg "Begin" b
+\begin{$1}
+	$2
+\end{$1}
+endsnippet
+
+snippet mk "InlineMath" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+snippet dm "BlockMath" wA
+\[
+	$1
+\]$0
+endsnippet
+
+snippet check "CheckMark"
+\textcolor{ForestGreen}{\checkmark}
+endsnippet
+
+snippet corr "Correct"
+\textcolor{red}{$1}
+endsnippet
+
+snippet pm "Parenthesied matrix" A
+\begin{pmatrix}$1\end{pmatrix}
+endsnippet
