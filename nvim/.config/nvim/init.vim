@@ -1,12 +1,19 @@
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
+" Go development
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" Better python syntax
 Plug 'vim-python/python-syntax'
 
+" Colorscheme
 Plug 'srcery-colors/srcery-vim'
 
+" Live preview for markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Snippets
+Plug 'SirVer/ultisnips'
 
 " Latex
 Plug 'lervag/vimtex'
@@ -24,6 +31,11 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 
 let g:go_auto_type_info = 1
+
+" Disable the scroll sync in the preview
+let g:mkdp_preview_options = {
+    \ 'disable_sync_scroll': 1,
+    \ }
 
 " Python syntax config
 let g:python_highlight_all = 1
