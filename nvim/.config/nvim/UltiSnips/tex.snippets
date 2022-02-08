@@ -26,6 +26,10 @@ snippet beg "Begin" b
 \end{$1}
 endsnippet
 
+snippet sec "Section" b
+\section{$1}
+endsnippet
+
 snippet mk "InlineMath" wA
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
@@ -49,6 +53,6 @@ snippet corr "Correct"
 \textcolor{red}{$1}
 endsnippet
 
-snippet pm "Parenthesied matrix" A
+snippet pm "Parenthesied matrix"
 \begin{pmatrix}$1\end{pmatrix}
 endsnippet

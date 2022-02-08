@@ -53,7 +53,8 @@ set cc=80
 set tw=792034
 set background=dark
 set clipboard=unnamedplus
-set expandtab
+" Tabs instead of spaces
+set noexpandtab
 set tabstop=2
 set shiftwidth=2
 set mouse=a
