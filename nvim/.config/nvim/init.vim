@@ -50,10 +50,13 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Disable the scroll sync in the preview
+" Disable the scroll sync in the markdown preview
 let g:mkdp_preview_options = {
     \ 'disable_sync_scroll': 1,
     \ }
+
+" Run black formatter on save
+autocmd BufWritePre *.py execute ':Black'
 
 " Python syntax config
 let g:python_highlight_all = 1
