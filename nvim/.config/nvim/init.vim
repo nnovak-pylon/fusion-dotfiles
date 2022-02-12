@@ -16,6 +16,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Better python syntax
 Plug 'vim-python/python-syntax'
 
+" Formatter for Python
+Plug 'psf/black'
+
 " Colorscheme
 Plug 'srcery-colors/srcery-vim'
 
