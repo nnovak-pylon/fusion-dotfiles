@@ -55,6 +55,11 @@ let g:mkdp_preview_options = {
     \ 'disable_sync_scroll': 1,
     \ }
 
+" Run the Java formatter on save
+augroup autoformat_settings
+  autocmd FileType java AutoFormatBuffer google-java-format
+augroup END
+
 " Run black formatter on save
 autocmd BufWritePre *.py execute ':Black'
 
