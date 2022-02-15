@@ -76,3 +76,20 @@ endsnippet
 snippet pm "Parenthesied matrix" i
 \begin{pmatrix}$1\end{pmatrix}
 endsnippet
+
+# Graphing utilities
+snippet graph "Start Graph" b
+\begin{center}
+	\begin{tikzpicture}
+		$1
+	\end{tikzpicture}
+\end{center}$0
+endsnippet
+
+snippet line "Graph Line" w
+\draw[<->] ($1)--($2) node[]{$3};
+endsnippet
+
+snippet vector "Graph Vector" w
+\draw[line width=2pt,blue,-stealth] ($1)--($2) node[]{$3};
+endsnippet
