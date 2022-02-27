@@ -77,6 +77,11 @@ autocmd BufWritePre *.py execute ':Black'
 " Python syntax config
 let g:python_highlight_all = 1
 
+" Settings for markdown
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_frontmatter = 1
+
 " Vimtex configuration
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_quickfix_mode=0
@@ -181,10 +186,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 END
 
+" Rustfmt config
 let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 
+" Better auto-completions
 set completeopt=menuone,noinsert,noselect
 
 " Proper search
@@ -192,6 +199,9 @@ set incsearch
 set ignorecase
 set smartcase
 set gdefault
+
+" Prevent markdown from collapsing content
+set nofoldenable
 
 set cc=80
 set tw=792034
