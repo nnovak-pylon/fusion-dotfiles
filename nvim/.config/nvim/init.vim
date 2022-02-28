@@ -114,11 +114,11 @@ cmp.setup({
 })
 
 -- Enable completing paths in :
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  })
-})
+--cmp.setup.cmdline(':', {
+--  sources = cmp.config.sources({
+--    { name = 'path' }
+--  })
+--})
 
 -- Setup lspconfig.
 local on_attach = function(client, bufnr)
