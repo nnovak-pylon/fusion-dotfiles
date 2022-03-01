@@ -97,3 +97,11 @@ endsnippet
 snippet vector "Graph Vector" w
 \draw[line width=2pt,blue,-stealth] ($1)--($2) node[]{$3};
 endsnippet
+
+snippet xaxis "X Axis" w
+\draw[<->] (-$1,0)--($1,0) node[anchor=west]{$x$};$0
+endsnippet
+
+snippet yaxis "Y Axis" w
+\draw[<->] (0,-$1)--(0,$1) node[anchor=west]{$y$};$0
+endsnippet

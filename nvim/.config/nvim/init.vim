@@ -38,6 +38,9 @@ Plug 'hrsh7th/cmp-path', {'branch': 'main'}
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
 
+" Autocompletion snippets
+Plug 'hrsh7th/vim-vsnip'
+
 " More syntax
 Plug 'rust-lang/rust.vim'
 Plug 'plasticboy/vim-markdown'
@@ -193,6 +196,9 @@ let g:rustfmt_fail_silently = 0
 
 " Better auto-completions
 set completeopt=menuone,noinsert,noselect
+
+" Prevent rust-analyzer from jumping the code around
+set signcolumn=yes
 
 " Proper search
 set incsearch
