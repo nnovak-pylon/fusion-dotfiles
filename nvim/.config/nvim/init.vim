@@ -17,7 +17,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'psf/black'
 
 " Colorscheme
-Plug 'srcery-colors/srcery-vim'
+Plug 'morhetz/gruvbox'
 
 " Live preview for markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -209,6 +209,7 @@ set gdefault
 " Prevent markdown from collapsing content
 set nofoldenable
 
+" Vertical bar at 80 characters
 set cc=80
 set tw=792034
 set background=dark
@@ -218,4 +219,10 @@ set noexpandtab
 set tabstop=2
 set shiftwidth=2
 set mouse=a
-colorscheme srcery
+
+" True-color support: https://github.com/morhetz/gruvbox/wiki/Terminal-specific#0-recommended-neovimvim-true-color-support
+if (has("termguicolors"))
+	set termguicolors
+endif
+
+colorscheme gruvbox
