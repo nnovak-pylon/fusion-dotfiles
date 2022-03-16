@@ -105,3 +105,11 @@ endsnippet
 snippet yaxis "Y Axis" w
 \draw[<->] (0,-$1)--(0,$1) node[anchor=west]{$y$};$0
 endsnippet
+
+snippet node "Graph Node" w
+\node[circle,draw] ($1) at ($2,$3) {$4};$0
+endsnippet
+
+snippet connect "Connect Nodes" w
+\path[dashed] ($1) edge node[above] {$3} ($2);
+endsnippet
