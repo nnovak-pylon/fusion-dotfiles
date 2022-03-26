@@ -45,6 +45,7 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'rust-lang/rust.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-python/python-syntax'
+Plug 'karolbelina/uxntal.vim'
 
 call plug#end()
 
