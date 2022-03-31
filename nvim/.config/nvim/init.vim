@@ -39,6 +39,7 @@ Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
 Plug 'ray-x/lsp_signature.nvim'
 
 " Autocompletion snippets
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
 Plug 'hrsh7th/vim-vsnip'
 
 " More syntax
@@ -181,6 +182,11 @@ lspconfig.rust_analyzer.setup {
   capabilities = capabilities,
 }
 
+lspconfig.java_language_server.setup{
+	on_attach = on_attach,
+	cmd = {"/usr/share/java/java-language-server/lang_server_linux.sh"},
+}
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = true,
@@ -189,6 +195,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 END
+
+" Enable type inlay hints
+autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
 
 " Rustfmt config
 let g:rustfmt_autosave = 1
@@ -226,6 +235,7 @@ set shiftwidth=2
 
 " Normal mouse behavior
 set mouse=a
+
 
 " True-color support: https://github.com/morhetz/gruvbox/wiki/Terminal-specific#0-recommended-neovimvim-true-color-support
 if (has("termguicolors"))
