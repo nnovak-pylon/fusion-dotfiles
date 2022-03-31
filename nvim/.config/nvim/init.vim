@@ -215,10 +215,16 @@ set cc=80
 set tw=792034
 set background=dark
 set clipboard=unnamedplus
+
 " Tabs instead of spaces
+" tabstop is the number of spaces for the tab character
+" expandtab expands tabs into spaces, and noexpandtab disables this
+" shiftwidth is the number of spaces to use as indentation
 set noexpandtab
 set tabstop=2
 set shiftwidth=2
+
+" Normal mouse behavior
 set mouse=a
 
 " True-color support: https://github.com/morhetz/gruvbox/wiki/Terminal-specific#0-recommended-neovimvim-true-color-support
