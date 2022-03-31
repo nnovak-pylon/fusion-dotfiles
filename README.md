@@ -8,5 +8,5 @@ My configuration files for the various tools that I use
 
 ```
 sudo pacman -S python-pynvim wl-clipboard rust-analyzer
-paru -S google-java-format
+paru -S google-java-format java-language-server-git
 ```
