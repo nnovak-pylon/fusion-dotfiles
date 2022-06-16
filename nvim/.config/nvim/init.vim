@@ -199,6 +199,10 @@ END
 " Enable type inlay hints
 autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
 
+" Press Ctrl+L to correct the previous spelling mistake
+" https://castel.dev/post/lecture-notes-1/#correcting-spelling-mistakes-on-the-fly
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 " Rustfmt config
 let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
