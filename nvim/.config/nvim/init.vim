@@ -48,6 +48,14 @@ Plug 'plasticboy/vim-markdown'
 Plug 'vim-python/python-syntax'
 Plug 'karolbelina/uxntal.vim'
 
+" Javascript Syntax
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+" Javascript LSPs
+Plug 'denoland/deno'
+Plug 'facebook/flow'
+
 call plug#end()
 
 set autowrite
@@ -90,6 +98,9 @@ let g:vim_markdown_frontmatter = 1
 " Vimtex configuration
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_quickfix_mode=0
+
+" Javascript Flow syntax support
+let g:javascript_plugin_flow=1
 
 " LSP configuration
 lua << END
@@ -185,6 +196,34 @@ lspconfig.rust_analyzer.setup {
 lspconfig.java_language_server.setup{
 	on_attach = on_attach,
 	cmd = {"/usr/share/java/java-language-server/lang_server_linux.sh"},
+}
+
+-- Required for the Deno Language Server
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+
+-- Deno Javascript Language Server
+lspconfig.denols.setup{
+	on_attach = on_attach,
+	flags = lsp_flags,
+	-- Disable the highlighting for Deno, because it conflicts with Flow typing
+	handlers = {
+		["textDocument/publishDiagnostics"] = vim.lsp.with(
+			vim.lsp.diagnostic.on_publish_diagnostics, {
+				-- Disable virtual_text
+				virtual_text = false,
+				signs = false,
+			}
+		)
+	}
+}
+
+-- Flow Javascript Language Server
+lspconfig.flow.setup{
+	on_attach = on_attach,
+	flags = lsp_flags,
+	cmd = {"flow", "lsp"}
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
