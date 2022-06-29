@@ -10,6 +10,9 @@ Plug 'google/vim-codefmt'
 " `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
 
+" Kotlin
+Plug 'udalov/kotlin-vim'
+
 " Go development
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -118,12 +121,18 @@ cmp.setup({
     -- Tab immediately completes. C-n/C-p to select.
     ['<Tab>'] = cmp.mapping.confirm({ select = true })
   },
-  sources = cmp.config.sources({
+  sources = cmp.config.sources(
+		{
     -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
-    { name = 'nvim_lsp' },
-  }, {
-    { name = 'path' },
-  }),
+			{ name = 'nvim_lsp' },
+  	}
+		-- Disable 'path' auto-completion
+		--[[
+		{
+    	{ name = 'path' },
+  	}
+		--]]
+	),
   experimental = {
     ghost_text = true,
   },
@@ -204,20 +213,12 @@ vim.g.markdown_fenced_languages = {
 }
 
 -- Deno Javascript Language Server
+--[[
 lspconfig.denols.setup{
 	on_attach = on_attach,
 	flags = lsp_flags,
-	-- Disable the highlighting for Deno, because it conflicts with Flow typing
-	handlers = {
-		["textDocument/publishDiagnostics"] = vim.lsp.with(
-			vim.lsp.diagnostic.on_publish_diagnostics, {
-				-- Disable virtual_text
-				virtual_text = false,
-				signs = false,
-			}
-		)
-	}
 }
+--]]
 
 -- Flow Javascript Language Server
 lspconfig.flow.setup{
