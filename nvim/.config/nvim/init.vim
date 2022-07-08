@@ -273,7 +273,7 @@ set clipboard=unnamedplus
 " tabstop is the number of spaces for the tab character
 " expandtab expands tabs into spaces, and noexpandtab disables this
 " shiftwidth is the number of spaces to use as indentation
-set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 
