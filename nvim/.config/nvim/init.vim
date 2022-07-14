@@ -59,6 +59,9 @@ Plug 'mxw/vim-jsx'
 Plug 'denoland/deno'
 Plug 'facebook/flow'
 
+" Displays Git diffs in the gutters
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 set autowrite
