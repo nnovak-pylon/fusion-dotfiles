@@ -62,6 +62,12 @@ Plug 'facebook/flow'
 " Displays Git diffs in the gutters
 Plug 'airblade/vim-gitgutter'
 
+" File browser
+Plug 'preservim/nerdtree'
+
+" Allows searching for files by name
+Plug 'junegunn/fzf'
+
 call plug#end()
 
 set autowrite
