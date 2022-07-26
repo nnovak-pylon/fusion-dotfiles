@@ -66,7 +66,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
 
 " Allows searching for files by name
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
