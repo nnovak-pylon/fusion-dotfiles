@@ -18,10 +18,7 @@ $3
 endsnippet
 
 snippet box "Box"
-`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
-│ $1 │
-`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
-$0
+\boxed{$1}$0
 endsnippet
 
 snippet beg "Begin" b
@@ -36,6 +33,10 @@ endsnippet
 
 snippet sub "Subsection" b
 \subsection{$1}$0
+endsnippet
+
+snippet subsub "Subsubsection" b
+\subsubsection{$1}$0
 endsnippet
 
 snippet span "Linear Span" w
@@ -104,6 +105,10 @@ endsnippet
 
 snippet yaxis "Y Axis" w
 \draw[<->] (0,-$1)--(0,$1) node[anchor=west]{$y$};$0
+endsnippet
+
+snippet point "Point" w
+\filldraw[black] ($1) circle (2pt) node[]{};
 endsnippet
 
 snippet node "Graph Node" w

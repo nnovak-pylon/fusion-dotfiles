@@ -1,5 +1,8 @@
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
+" Add all the syntax for the languages I could ever need
+Plug 'sheerun/vim-polyglot'
+
 " Java auto formatting
 
 " Add maktaba and codefmt to the runtimepath.
@@ -98,6 +101,9 @@ augroup END
 
 " Run black formatter on save
 autocmd BufWritePre *.py execute ':Black'
+
+" Add custom syntax for files
+au BufRead,BufNewFile *.asm set filetype=mips
 
 " Python syntax config
 let g:python_highlight_all = 1
