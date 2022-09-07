@@ -111,6 +111,11 @@ snippet yaxis "Y Axis" w
 \draw[<->] (0,-$1)--(0,$1) node[anchor=west]{$y$};$0
 endsnippet
 
+snippet axes "Graph between two axes"
+\draw[->] (0,0)--(0,$1) node[anchor=west]{$2};
+\draw[->] (0,0)--($1,0) node[anchor=west]{$3};$0
+endsnippet
+
 snippet point "Point" w
 \filldraw[black] ($1) circle (2pt) node[]{};
 endsnippet
