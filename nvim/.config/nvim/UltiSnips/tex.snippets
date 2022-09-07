@@ -71,7 +71,11 @@ snippet dm "BlockMath" wA
 endsnippet
 
 snippet check "CheckMark"
-\textcolor{ForestGreen}{\checkmark}
+\checkmark
+endsnippet
+
+snippet cross "CrossMark"
+\times
 endsnippet
 
 snippet corr "Correct"
@@ -117,4 +121,8 @@ endsnippet
 
 snippet connect "Connect Nodes" w
 \path[dashed] ($1) edge node[above] {$3} ($2);
+endsnippet
+
+snippet brace "Curly brace between points" w
+\draw[decorate,decoration={brace}] ($1) -- ($2) node[]{$3};$0
 endsnippet
