@@ -2,7 +2,12 @@
 
 My configuration files for the various tools that I use
 
-# Setup
+# Usage
+
+To create the necessary symlinks, use the `nli` command-line tool:
+
+* `nli sync` To link everything
+* `nli sync --desync` To clean up all the links
 
 ## Arch:
 
