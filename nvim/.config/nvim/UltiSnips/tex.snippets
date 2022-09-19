@@ -104,11 +104,11 @@ snippet vector "Graph Vector" w
 endsnippet
 
 snippet xaxis "X Axis" w
-\draw[<->] (-$1,0)--($1,0) node[anchor=west]{$x$};$0
+\draw[->] (0,0)--($1,0) node[anchor=west]{$x$};$0
 endsnippet
 
 snippet yaxis "Y Axis" w
-\draw[<->] (0,-$1)--(0,$1) node[anchor=west]{$y$};$0
+\draw[->] (0,0)--(0,$1) node[anchor=west]{$y$};$0
 endsnippet
 
 snippet axes "Graph between two axes"
@@ -130,4 +130,8 @@ endsnippet
 
 snippet brace "Curly brace between points" w
 \draw[decorate,decoration={brace}] ($1) -- ($2) node[]{$3};$0
+endsnippet
+
+snippet link "Hyperlink" w
+\href{$1}{$2}$0
 endsnippet

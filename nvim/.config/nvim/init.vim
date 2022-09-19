@@ -94,6 +94,17 @@ let g:mkdp_preview_options = {
     \ 'disable_sync_scroll': 1,
     \ }
 
+" LaTeX shell escape
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-shell-escape',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \ }
+
 " Run the Java formatter on save
 augroup autoformat_settings
   autocmd FileType java AutoFormatBuffer google-java-format
