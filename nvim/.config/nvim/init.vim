@@ -116,6 +116,8 @@ autocmd BufWritePre *.py execute ':Black'
 " Add custom syntax for files
 au BufRead,BufNewFile *.asm set filetype=mips
 
+autocmd FileType tex set spell
+
 " Python syntax config
 let g:python_highlight_all = 1
 
