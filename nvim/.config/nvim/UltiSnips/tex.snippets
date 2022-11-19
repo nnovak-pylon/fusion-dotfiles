@@ -17,6 +17,18 @@ $3
 \end{document}
 endsnippet
 
+snippet incfig "Include Figures"
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
+}
+endsnippet
+
 snippet box "Box"
 \boxed{$1}$0
 endsnippet
