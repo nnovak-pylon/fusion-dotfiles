@@ -97,6 +97,13 @@ require('nvim-treesitter.configs').setup({
     auto_install = true,
     highlight = {
         enable = true,
+        disable = function(lang, bufnr)
+            -- including vim for the sake of Lua blocks inside VimL
+            if lang == "vim" or lang == "lua" then
+                return false
+            end
+            return true
+        end
     },
 })
 EOF
@@ -104,8 +111,8 @@ EOF
 " LSP configuration
 lua << EOF
 
-	local cmp = require'cmp'
-	local lspconfig = require'lspconfig'
+  local cmp = require'cmp'
+  local lspconfig = require'lspconfig'
 
   cmp.setup({
     snippet = {
@@ -114,77 +121,77 @@ lua << EOF
         vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
-		mapping = {
-			['<C-b>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			['<C-Space>'] = cmp.mapping.complete(),
-			['<C-e>'] = cmp.mapping.abort(),
-			['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-		},
-		sources = cmp.config.sources({
+    mapping = {
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'ultisnips' }, -- For ultisnips users.
     }, {
       { name = 'buffer' },
     })
-	})
+  })
 
-	local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
   -- Rust language server
-	lspconfig.rust_analyzer.setup {
-		on_attach = on_attach,
-		flags = {
-			debounce_text_changes = 150,
-		},
-		settings = {
-			["rust-analyzer"] = {
-				cargo = {
-					allFeatures = true,
-				},
-				completion = {
-					postfix = {
-						enable = false,
-					},
-				},
-			},
-		},
-		capabilities = capabilities,
-	}
+  lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+        },
+        completion = {
+          postfix = {
+            enable = false,
+          },
+        },
+      },
+    },
+    capabilities = capabilities,
+  }
 
   -- Java language server
-	lspconfig.java_language_server.setup{
-		on_attach = on_attach,
-		cmd = {"/usr/share/java/java-language-server/lang_server_linux.sh"},
-	}
+  lspconfig.java_language_server.setup{
+    on_attach = on_attach,
+    cmd = {"/usr/share/java/java-language-server/lang_server_linux.sh"},
+  }
 
-	-- Required for the Deno Language Server
-	vim.g.markdown_fenced_languages = {
-		"ts=typescript"
-	}
+  -- Required for the Deno Language Server
+  vim.g.markdown_fenced_languages = {
+    "ts=typescript"
+  }
 
-	-- Deno Javascript Language Server
-	lspconfig.denols.setup{
-		on_attach = on_attach,
-		flags = lsp_flags,
-	}
+  -- Deno Javascript Language Server
+  lspconfig.denols.setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+  }
 
-	--[[
-	-- Flow Javascript Language Server
-	lspconfig.flow.setup{
-		on_attach = on_attach,
-		flags = lsp_flags,
-		cmd = {"flow", "lsp"}
-	}
-	--]]
+  --[[
+  -- Flow Javascript Language Server
+  lspconfig.flow.setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    cmd = {"flow", "lsp"}
+  }
+  --]]
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics, {
-			virtual_text = true,
-			signs = true,
-			update_in_insert = true,
-		}
-	)
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = true,
+      signs = true,
+      update_in_insert = true,
+    }
+  )
 EOF
 
 " Auto-save buffers when they switch
@@ -294,7 +301,7 @@ set mouse=a
 
 " True-color support: https://github.com/morhetz/gruvbox/wiki/Terminal-specific#0-recommended-neovimvim-true-color-support
 if (has("termguicolors"))
-	set termguicolors
+  set termguicolors
 endif
 
 colorscheme gruvbox
