@@ -231,7 +231,7 @@ let g:vimtex_compiler_latexmk = {
     \ }
 
 " Turn on spell checking and concealing for Tex files automatically
-autocmd FileType tex setlocal spell tw=80 colorcolumn=81 conceallevel=1
+autocmd FileType tex setlocal spell colorcolumn=81 conceallevel=1
 
 " Turn on text concealing in Tex files
 let g:tex_conceal='abdmg'
