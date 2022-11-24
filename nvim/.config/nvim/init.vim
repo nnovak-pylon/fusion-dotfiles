@@ -10,6 +10,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'karolbelina/uxntal.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " Javascript Syntax
 "Plug 'pangloss/vim-javascript'
@@ -41,6 +42,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Rust
 Plug 'rust-lang/rust.vim'
 
+" Lean
+Plug 'Julian/lean.nvim'
+
 " Colorscheme
 Plug 'morhetz/gruvbox'
 
@@ -63,6 +67,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-lua/plenary.nvim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -99,7 +104,7 @@ require('nvim-treesitter.configs').setup({
         enable = true,
         disable = function(lang, bufnr)
             -- including vim for the sake of Lua blocks inside VimL
-            if lang == "vim" or lang == "lua" then
+            if lang == "vim" or lang == "lua" or lang == "lean" then
                 return false
             end
             return true
@@ -185,6 +190,13 @@ lua << EOF
   }
   --]]
 
+  lspconfig.leanls.setup{
+      abbreviations = { builtin = true },
+      lsp = { on_attach = on_attach },
+      lsp3 = { on_attach = on_attach },
+      mappings = true,
+  }
+
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
       virtual_text = true,
@@ -245,6 +257,7 @@ augroup END
 
 " Assume that all asm files are MIPS assembly syntax
 au BufRead,BufNewFile *.asm set filetype=mips
+au BufRead *.lean set filetype=lean
 
 " Python syntax config
 let g:python_highlight_all = 1
