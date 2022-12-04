@@ -62,6 +62,7 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 
 " LSP Config
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
