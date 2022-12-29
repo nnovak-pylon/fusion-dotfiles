@@ -1,3 +1,5 @@
+let g:polyglot_disabled = ['csv']
+
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 " Syntax Highlighting
