@@ -28,6 +28,9 @@ require('packer').startup(function(use)
     },
   }
 
+  use 'SirVer/ultisnips'
+  use 'quangnguyen30192/cmp-nvim-ultisnips'
+
   -- Highlight, edit, and navigate code
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -109,14 +112,15 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = vim.fn.expand '$MYVIMRC',
 })
 
+-- LaTeX specific commands
 local texfiles = vim.api.nvim_create_augroup('texfiles', { clear = true})
-
 vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal spell colorcolumn=81 conceallevel=1',
   group = texfiles,
   pattern = { 'tex' },
 })
 
+-- Autoformatting commands
 local autoformats = vim.api.nvim_create_augroup(
   'autoformat_settings',
   { clear = true }
@@ -155,6 +159,11 @@ vim.g.go_highlight_extra_types = 1
 vim.g.go_highlight_operators = 1
 vim.g.go_auto_type_info = 1
 
+-- UltiSnips keybindings
+vim.g.UltiSnipsExpandTrigger="<tab>"
+vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
+vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"
+
 -- Vimtex configuration
 vim.g.vimtex_view_method = 'zathura'
 vim.g.vimtex_quickfix_mode=0
@@ -170,53 +179,9 @@ vim.g.vimtex_compiler_latexmk = {
 
 vim.g.python_highlight_all = 1
 
--- Normal Settings
-
--- Make line numbers default
-vim.wo.number = true
-
-vim.o.colorcolumn = 80
-vim.o.background = "dark"
-vim.o.clipboard = "unnamedplus"
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.incsearch = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.gdefault = true
-
--- Decrease update time
-vim.o.updatetime = 250
-
--- Add a gutter so that things don't jump around
-vim.wo.signcolumn = 'yes'
-
--- Prevent markdown from collapsing down
-vim.o.foldenable = false
-
--- Tabs instead of spaces
--- :h tabstop is the number of spaces for a tab character
--- :h expandtab expands tabs into spaces
--- :h shiftwidth is the number of spaces to use as indentation
-vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme gruvbox]]
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -489,7 +454,8 @@ local luasnip = require 'luasnip'
 cmp.setup {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      --luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert {
@@ -521,10 +487,7 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    --{ name = 'luasnip' },
+    { name = 'ultisnips' },
   },
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
-
