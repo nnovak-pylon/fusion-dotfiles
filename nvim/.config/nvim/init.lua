@@ -50,7 +50,7 @@ require('packer').startup(function(use)
   -- [Language Development]
   use {
     'fatih/vim-go',
-    cmd = 'GoUpdateBinaries',
+    run = ':GoUpdateBinaries',
   }
 
   use 'rust-lang/rust.vim'
@@ -158,6 +158,11 @@ vim.g.go_highlight_function_calls = 1
 vim.g.go_highlight_extra_types = 1
 vim.g.go_highlight_operators = 1
 vim.g.go_auto_type_info = 1
+
+-- Rust development options
+vim.g.rustfmt_autosave = 1
+vim.g.rustfmt_emit_files = 1
+vim.g.rustfmt_fail_silently = 0
 
 -- UltiSnips keybindings
 vim.g.UltiSnipsExpandTrigger="<tab>"
@@ -395,7 +400,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  gopls = {},
+  --gopls = {},
   sumneko_lua = {
     Lua = {
       workspace = { checkThirdParty = false },
