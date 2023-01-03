@@ -1,7 +1,7 @@
 -- Make line numbers default
 vim.wo.number = true
 
-vim.o.colorcolumn = 80
+vim.o.colorcolumn = "80"
 vim.o.background = "dark"
 vim.o.clipboard = "unnamedplus"
 
