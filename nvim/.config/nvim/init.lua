@@ -115,7 +115,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- LaTeX specific commands
 local texfiles = vim.api.nvim_create_augroup('texfiles', { clear = true})
 vim.api.nvim_create_autocmd('FileType', {
-  command = 'setlocal spell colorcolumn=81 conceallevel=1',
+  command = 'setlocal spell colorcolumn=81 tw=80 conceallevel=1',
   group = texfiles,
   pattern = { 'tex' },
 })
