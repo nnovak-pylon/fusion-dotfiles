@@ -137,6 +137,11 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = autoformats,
   pattern = { '*.py' },
 })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  command = 'OmniSharpCodeFormat',
+  group = autoformats,
+  pattern = { '*.cs' },
+})
 
 -- Filetype Detection
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
@@ -165,6 +170,9 @@ vim.g.go_auto_type_info = 1
 vim.g.rustfmt_autosave = 1
 vim.g.rustfmt_emit_files = 1
 vim.g.rustfmt_fail_silently = 0
+
+-- OmniSharp options
+vim.g.OmniSharp_server_path = '/usr/bin/omnisharp'
 
 -- UltiSnips keybindings
 vim.g.UltiSnipsExpandTrigger="<tab>"
@@ -422,6 +430,7 @@ local servers = {
      },
   },
   jdtls = {},
+  omnisharp = {},
 }
 
 
