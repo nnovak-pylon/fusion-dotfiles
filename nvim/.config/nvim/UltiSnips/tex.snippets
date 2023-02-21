@@ -43,6 +43,12 @@ snippet beg "Begin" b
 \end{$1}
 endsnippet
 
+snippet ali "Align Equation" b
+\begin{align*}
+	$1
+\end{align*}
+endsnippet
+
 snippet sec "Section" b
 \section{$1}
 endsnippet
@@ -73,6 +79,10 @@ endsnippet
 
 snippet norm "Mathematical Norm" w
 \left\Vert$1\right\Vert
+endsnippet
+
+snippet part "Partial Derivative" w
+\frac{\partial $1}{\partial $2}$0
 endsnippet
 
 snippet ceil "Ceiling" w
