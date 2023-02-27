@@ -1,121 +1,197 @@
-require('packer').startup(function(use)
-  -- Package manager
-  use 'wbthomason/packer.nvim'
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-  -- LSP Configuration
-  use {
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- NOTE: Here is where you install your plugins.
+--  You can configure plugins using the `config` key.
+--
+--  You can also configure plugins after the setup call,
+--    as they will be available in your neovim runtime.
+require('lazy').setup({
+  -- NOTE: First, some plugins that don't require any configuration
+
+  -- Git related plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
+  -- Detect tabstop and shiftwidth automatically
+  --'tpope/vim-sleuth',
+
+  -- NOTE: This is where your plugins related to LSP can be installed.
+  --  The configuration is done below. Search for lspconfig to find it below.
+  { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    requires = {
+    dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', opts = {} },
 
-      -- Additional lua configuration, makes nvim stuff amazing
+      -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
-  }
+  },
 
-  -- Autocompletion
-  use {
+  { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = {
+    dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip'
     },
-  }
+  },
 
-  use 'SirVer/ultisnips'
-  use 'quangnguyen30192/cmp-nvim-ultisnips'
+  -- Useful plugin to show you pending keybinds.
+  { 'folke/which-key.nvim',          opts = {} },
+  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      -- See `:help gitsigns.txt`
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
 
-  -- Highlight, edit, and navigate code
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
+  {
+    'morhetz/gruvbox',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'gruvbox'
     end,
-  }
+  },
 
-  use { -- Additional text objects via treesitter
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
-  }
+  { -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = 'gruvbox',
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
 
-  -- [Language Syntax]
-  use 'karolbelina/uxntal.vim'
+  { -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help indent_blankline.txt`
+    opts = {
+      char = '┊',
+      show_trailing_blankline_indent = false,
+    },
+  },
 
-  -- [Language Development]
-  use {
-    'fatih/vim-go',
-    run = ':GoUpdateBinaries',
-  }
-
-  use 'rust-lang/rust.vim'
-
-  use 'Julian/lean.nvim'
-
-  use 'OmniSharp/omnisharp-vim'
-
-  -- [Auto Formatting]
-
-  -- Google Java auto-format
-  use 'google/vim-maktaba'
-  use 'google/vim-codefmt'
-  use 'google/vim-glaive'
-
-  -- Python auto-format
-  use 'psf/black'
-
-  -- LaTeX
-  use 'lervag/vimtex'
-  use 'KeitaNakamura/tex-conceal.vim'
-
-
-  -- Git related plugins
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
-
-  -- Colorscheme
-  use 'morhetz/gruvbox'
-
-  -- Fancier statusline
-  use 'nvim-lualine/lualine.nvim'
-
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  --use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim',         opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  use {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    requires = { 'nvim-lua/plenary.nvim' },
-  }
+  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
 
-  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+  -- Only load if `make` is available. Make sure you have the system
+  -- requirements installed.
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    -- NOTE: If you are having trouble with this installation,
+    --       refer to the README for telescope-fzf-native for more instructions.
+    build = 'make',
+    cond = function()
+      return vim.fn.executable 'make' == 1
+    end,
+  },
 
-  -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-  local has_plugins, plugins = pcall(require, 'custom.plugins')
-  if has_plugins then
-    plugins(use)
-  end
-end)
+  { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    config = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  },
 
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
-})
+  {
+    'SirVer/ultisnips'
+  },
+
+  { 'quangnguyen30192/cmp-nvim-ultisnips' },
+
+  { 'karolbelina/uxntal.vim' },
+
+  {
+    'fatih/vim-go',
+    build = ':GoUpdateBinaries',
+  },
+
+  { 'rust-lang/rust.vim' },
+  { 'Julian/lean.nvim' },
+  { 'Omnisharp/omnisharp-vim' },
+
+  -- Google Java auto-format
+  {
+    'google/vim-codefmt',
+    dependencies = {
+      'google/vim-maktaba',
+      'google/vim-glaive',
+    },
+  },
+
+  { 'psf/black' },
+
+  { 'lervag/vimtex' },
+  { 'KeitaNakamura/tex-conceal.vim' },
+
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-rhubarb' },
+  { 'lewis6991/gitsigns.nvim' },
+
+  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
+  --       These are some example plugins that I've included in the kickstart repository.
+  --       Uncomment any of the lines below to enable them.
+  require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.debug',
+
+  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
+  --    up-to-date with whatever is in the kickstart repo.
+  --
+  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+  --
+  --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
+  --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
+  --{ import = 'custom.plugins' },
+}, {})
 
 -- LaTeX specific commands
-local texfiles = vim.api.nvim_create_augroup('texfiles', { clear = true})
+local texfiles = vim.api.nvim_create_augroup('texfiles', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal spell colorcolumn=81 tw=80 conceallevel=1',
   group = texfiles,
@@ -175,13 +251,13 @@ vim.g.rustfmt_fail_silently = 0
 vim.g.OmniSharp_server_path = '/usr/bin/omnisharp'
 
 -- UltiSnips keybindings
-vim.g.UltiSnipsExpandTrigger="<tab>"
-vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
-vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"
+vim.g.UltiSnipsExpandTrigger = "<tab>"
+vim.g.UltiSnipsJumpForwardTrigger = "<c-b>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<c-z>"
 
 -- Vimtex configuration
 vim.g.vimtex_view_method = 'zathura'
-vim.g.vimtex_quickfix_mode=0
+vim.g.vimtex_quickfix_mode = 0
 vim.g.vimtex_compiler_latexmk = {
   options = {
     '-shell-escape',
@@ -196,7 +272,6 @@ vim.g.python_highlight_all = 1
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme gruvbox]]
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -411,23 +486,23 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   --gopls = {},
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
   rust_analyzer = {
-     ["rust-analyzer"] = {
-       cargo = {
-         allFeatures = true,
-       },
-       completion = {
-         postfix = {
-           enable = false,
-         },
-       },
-     },
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+      completion = {
+        postfix = {
+          enable = false,
+        },
+      },
+    },
   },
   jdtls = {},
   omnisharp = {},
@@ -502,7 +577,7 @@ mason_lspconfig.setup_handlers {
       -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
       -- true
       analyze_open_documents_only = false,
-  }
+    }
   end,
 }
 
@@ -521,7 +596,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<Tab>'] = cmp.mapping.confirm {
@@ -540,8 +615,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      elseif luasnip.jumpable( -1) then
+        luasnip.jump( -1)
       else
         fallback()
       end
