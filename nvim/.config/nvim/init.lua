@@ -159,7 +159,7 @@ require('lazy').setup({
 
   { 'rust-lang/rust.vim' },
   { 'Julian/lean.nvim' },
-  --{ 'Omnisharp/omnisharp-vim' },
+  { 'Omnisharp/omnisharp-vim' },
 
   -- Google Java auto-format
   {
@@ -259,7 +259,7 @@ vim.g.rustfmt_emit_files = 1
 vim.g.rustfmt_fail_silently = 0
 
 -- OmniSharp options
-vim.g.OmniSharp_server_path = '/usr/bin/omnisharp'
+vim.g.OmniSharp_server_path = '/usr/bin/omnisharp-mono'
 
 -- UltiSnips keybindings
 vim.g.UltiSnipsExpandTrigger = "<tab>"
@@ -525,7 +525,7 @@ local servers = {
     },
   },
   jdtls = {},
-  omnisharp = {},
+  omnisharp_mono = {},
 }
 
 
