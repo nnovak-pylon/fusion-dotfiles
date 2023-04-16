@@ -159,7 +159,7 @@ require('lazy').setup({
 
   { 'rust-lang/rust.vim' },
   { 'Julian/lean.nvim' },
-  { 'Omnisharp/omnisharp-vim' },
+  --{ 'Omnisharp/omnisharp-vim' },
 
   -- Google Java auto-format
   {
@@ -380,7 +380,16 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help' },
+  ensure_installed = {
+    'c',
+    'cpp',
+    'go',
+    'lua',
+    'python',
+    'rust',
+    'help',
+    'c_sharp',
+  },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -496,7 +505,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  --gopls = {},
+  gopls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -537,57 +546,12 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-local pid = vim.fn.getpid()
-
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
-    }
-  end,
-
-  ['omnisharp'] = function()
-    require('lspconfig').omnisharp.setup {
-      cmd = { '/usr/bin/omnisharp' },
-
-      on_attach = on_attach,
-      capabilities = capabilities,
-      -- Enables support for reading code style, naming convention and analyzer
-      -- settings from .editorconfig.
-      enable_editorconfig_support = true,
-
-      -- If true, MSBuild project system will only load projects for files that
-      -- were opened in the editor. This setting is useful for big C# codebases
-      -- and allows for faster initialization of code navigation features only
-      -- for projects that are relevant to code that is being edited. With this
-      -- setting enabled OmniSharp may load fewer projects and may thus display
-      -- incomplete reference lists for symbols.
-      enable_ms_build_load_projects_on_demand = false,
-
-      -- Enables support for roslyn analyzers, code fixes and rulesets.
-      enable_roslyn_analyzers = true,
-
-      -- Specifies whether 'using' directives should be grouped and sorted during
-      -- document formatting.
-      organize_imports_on_format = true,
-
-      -- Enables support for showing unimported types and unimported extension
-      -- methods in completion lists. When committed, the appropriate using
-      -- directive will be added at the top of the current file. This option can
-      -- have a negative impact on initial completion responsiveness,
-      -- particularly for the first few completion sessions after opening a
-      -- solution.
-      enable_import_completion = false,
-
-      -- Specifies whether to include preview versions of the .NET SDK when
-      -- determining which version to use for project loading.
-      sdk_include_prereleases = true,
-
-      -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-      -- true
-      analyze_open_documents_only = false,
     }
   end,
 }
