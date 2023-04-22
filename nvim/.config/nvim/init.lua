@@ -220,11 +220,6 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = { '*.py' },
 })
 vim.api.nvim_create_autocmd('BufWritePre', {
-  command = 'OmniSharpCodeFormat',
-  group = autoformats,
-  pattern = { '*.cs' },
-})
-vim.api.nvim_create_autocmd('BufWritePre', {
   command = 'FormatCode',
   group = autoformats,
   pattern = { '*.c' },
