@@ -384,6 +384,7 @@ require('nvim-treesitter.configs').setup {
     'rust',
     'vimdoc',
     'c_sharp',
+    'haskell',
   },
 
   highlight = { enable = true },
@@ -600,6 +601,7 @@ local servers = {
   },
   jdtls = {},
   omnisharp_mono = {},
+  hls = {},
 }
 
 
