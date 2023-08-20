@@ -1,0 +1,228 @@
+{
+    "streamdeck_ui_version": 1,
+    "state": {
+        "AL43J2C10864": {
+            "buttons": {
+                "0": {
+                    "0": {
+                        "command": "firefox",
+                        "write": "",
+                        "text": "Firefox",
+                        "text_vertical_align": "middle-bottom",
+                        "icon": "/usr/share/icons/hicolor/128x128/apps/firefox.png"
+                    },
+                    "1": {
+                        "command": "google-chrome-stable",
+                        "text": "Chrome",
+                        "text_vertical_align": "middle-bottom",
+                        "icon": "/usr/share/icons/hicolor/128x128/apps/google-chrome.png"
+                    },
+                    "2": {
+                        "command": "spotify",
+                        "text": "Spotify",
+                        "text_vertical_align": "middle-bottom",
+                        "icon": "/usr/share/icons/hicolor/128x128/apps/spotify.png"
+                    },
+                    "3": {
+                        "text": "Search on Wikipedia",
+                        "text_vertical_align": "middle-bottom",
+                        "write": " !w\n"
+                    },
+                    "4": {
+                        "command": "systemctl --user restart streamdeck",
+                        "text": "Restart Config",
+                        "text_vertical_align": "middle-bottom"
+                    },
+                    "5": {
+                        "text": "Project 1",
+                        "text_vertical_align": "middle-bottom",
+                        "command": "bash -c \"kitty /home/nicholas/git/quacs-oxy-scraper\""
+                    },
+                    "6": {
+                        "text": "PrismLauncher",
+                        "text_vertical_align": "middle-bottom",
+                        "command": "prismlauncher",
+                        "icon": "/usr/share/icons/hicolor/scalable/apps/org.prismlauncher.PrismLauncher.svg"
+                    },
+                    "7": {
+                        "text": "Discord",
+                        "text_vertical_align": "middle-bottom",
+                        "command": "discord",
+                        "icon": "/usr/share/icons/hicolor/256x256/apps/discord.png"
+                    },
+                    "8": {},
+                    "9": {},
+                    "10": {
+                        "text": "VENV ON",
+                        "command": "",
+                        "text_vertical_align": "middle-bottom",
+                        "keys": "",
+                        "write": "source venv/bin/activate\n"
+                    },
+                    "11": {
+                        "text": "VENV OFF",
+                        "text_vertical_align": "middle-bottom",
+                        "command": "",
+                        "write": "deactivate\n"
+                    },
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "1": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "2": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "3": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "4": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "5": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "6": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "7": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "8": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                },
+                "9": {
+                    "0": {},
+                    "1": {},
+                    "2": {},
+                    "3": {},
+                    "4": {},
+                    "5": {},
+                    "6": {},
+                    "7": {},
+                    "8": {},
+                    "9": {},
+                    "10": {},
+                    "11": {},
+                    "12": {},
+                    "13": {},
+                    "14": {}
+                }
+            }
+        }
+    }
+}
