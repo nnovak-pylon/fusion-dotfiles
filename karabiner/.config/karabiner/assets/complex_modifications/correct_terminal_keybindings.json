@@ -1,0 +1,110 @@
+{
+  "title": "Correct Keybindings in Terminal",
+  "maintainers": ["nnovak"],
+  "rules": [
+    {
+      "description": "Switch command+c to control+c for sending exit codes",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"]
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": ["option"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "c",
+              "modifiers": ["control"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Switch cmd+shift+c to command+c to be able to copy text",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": ["left_command", "shift"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "c",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Switch command+v to control+v to have backwards compatibility",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": ["left_command"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "v",
+              "modifiers": ["control"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Switch command+shift+v to command+v to be able to paste",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": ["left_command", "shift"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "v",
+              "modifiers": ["left_command"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
