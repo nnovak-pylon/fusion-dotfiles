@@ -253,6 +253,39 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "Use control+arrow keys to switch between words",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "left_arrow",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": {
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": ["esc"]
+            }
+          }
+        },
+        {
+          "from": {
+            "key_code": "right_arrow",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": ["esc"]
+            }
+          }
+        }
+      ]
     }
   ]
 }
