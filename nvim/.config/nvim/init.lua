@@ -84,17 +84,17 @@ require('lazy').setup({
   {
     'morhetz/gruvbox',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'gruvbox'
-    -- end,
+    config = function()
+      vim.cmd.colorscheme 'gruvbox'
+    end,
   },
 
   {
     'catppuccin/nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme "catppuccin"
-    end,
+    -- config = function()
+    --   vim.cmd.colorscheme "catppuccin"
+    -- end,
   },
 
   {
