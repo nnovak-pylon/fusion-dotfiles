@@ -114,12 +114,8 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+    main = "ibl",
+    opts = {},
   },
 
   -- "gc" to comment visual regions/lines
@@ -159,6 +155,8 @@ require('lazy').setup({
   { 'quangnguyen30192/cmp-nvim-ultisnips' },
 
   { 'karolbelina/uxntal.vim' },
+
+  { 'SeniorMars/typst.nvim' },
 
   {
     'fatih/vim-go',
@@ -329,9 +327,8 @@ require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
+require('ibl').setup {
+  indent = { char = '┊' },
 }
 
 -- Gitsigns
