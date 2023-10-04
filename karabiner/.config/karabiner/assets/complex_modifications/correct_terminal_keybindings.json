@@ -3,25 +3,25 @@
   "maintainers": ["nnovak"],
   "rules": [
     {
-      "description": "Switch command+c to control+c for sending exit codes",
+      "description": "Remap Control+C as copy unless in terminal",
       "manipulators": [
         {
           "conditions": [
             {
-              "type": "frontmost_application_if",
+              "type": "frontmost_application_unless",
               "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"]
             }
           ],
           "from": {
             "key_code": "c",
             "modifiers": {
-              "mandatory": ["option"]
+              "mandatory": ["control"]
             }
           },
           "to": [
             {
               "key_code": "c",
-              "modifiers": ["control"]
+              "modifiers": ["command"]
             }
           ],
           "type": "basic"
@@ -29,77 +29,25 @@
       ]
     },
     {
-      "description": "Switch cmd+shift+c to command+c to be able to copy text",
+      "description": "Remap Control+V as paste unless in terminal",
       "manipulators": [
         {
           "conditions": [
             {
-              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
-              "type": "frontmost_application_if"
-            }
-          ],
-          "from": {
-            "key_code": "c",
-            "modifiers": {
-              "mandatory": ["left_command", "shift"]
-            }
-          },
-          "to": [
-            {
-              "key_code": "c",
-              "modifiers": ["left_command"]
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Switch command+v to control+v to have backwards compatibility",
-      "manipulators": [
-        {
-          "conditions": [
-            {
-              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
-              "type": "frontmost_application_if"
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"]
             }
           ],
           "from": {
             "key_code": "v",
             "modifiers": {
-              "mandatory": ["left_command"]
+              "mandatory": ["control"]
             }
           },
           "to": [
             {
               "key_code": "v",
-              "modifiers": ["control"]
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Switch command+shift+v to command+v to be able to paste",
-      "manipulators": [
-        {
-          "conditions": [
-            {
-              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"],
-              "type": "frontmost_application_if"
-            }
-          ],
-          "from": {
-            "key_code": "v",
-            "modifiers": {
-              "mandatory": ["left_command", "shift"]
-            }
-          },
-          "to": [
-            {
-              "key_code": "v",
-              "modifiers": ["left_command"]
+              "modifiers": ["command"]
             }
           ],
           "type": "basic"
