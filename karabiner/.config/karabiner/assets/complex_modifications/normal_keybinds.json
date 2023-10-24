@@ -67,22 +67,6 @@
         },
         {
           "from": {
-            "key_code": "l",
-            "modifiers": {
-              "mandatory": ["control"]
-            }
-          },
-          "to": [
-            {
-              "key_code": "l",
-              "modifiers": ["left_command"]
-            }
-          ],
-          "type": "basic"
-        },
-
-        {
-          "from": {
             "key_code": "t",
             "modifiers": {
               "mandatory": ["control", "shift"]
