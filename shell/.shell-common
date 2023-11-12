@@ -1,0 +1,9 @@
+# Git aliases
+alias gs="git status"
+
+# Calculator
+alias k="kalker"
+
+# Common shortcuts
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
