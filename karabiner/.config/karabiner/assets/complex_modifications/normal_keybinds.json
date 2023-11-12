@@ -286,6 +286,26 @@
           }
         }
       ]
+    },
+    {
+      "description": "Simple Command to Control Mappings",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "s",
+              "modifiers": ["command"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
