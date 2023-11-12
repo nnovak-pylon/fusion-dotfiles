@@ -39,3 +39,8 @@ vim.o.shiftwidth = 2
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noinsert,noselect'
+
+-- Disable modelines, this removes some errors when opening text files
+vim.o.modeline = false
+
+vim.o.rtp = vim.o.rtp .. ",~/oxy/current-course"
