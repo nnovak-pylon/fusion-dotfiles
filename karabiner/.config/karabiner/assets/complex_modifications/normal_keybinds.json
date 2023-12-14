@@ -104,6 +104,12 @@
           "from": {
             "key_code": "left_command"
           },
+          "to": [
+            {
+              "key_code": "left_command",
+              "lazy": true
+            }
+          ],
           "to_if_alone": [
             {
               "key_code": "up_arrow",
