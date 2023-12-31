@@ -9,3 +9,4 @@
   rebase = false
 [alias]
   reset-file = checkout HEAD --
+  track = branch --set-upstream-to=origin/master master
