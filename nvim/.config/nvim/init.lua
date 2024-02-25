@@ -156,7 +156,7 @@ require('lazy').setup({
 
   { 'karolbelina/uxntal.vim' },
 
-  { 'SeniorMars/typst.nvim' },
+  { 'kaarmu/typst.vim' },
 
   {
     'fatih/vim-go',
