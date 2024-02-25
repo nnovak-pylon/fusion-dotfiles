@@ -10,3 +10,6 @@ alias grep='grep --color=auto'
 
 # Class picker
 alias c="nli class-list"
+
+# Connect upstream back
+git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
