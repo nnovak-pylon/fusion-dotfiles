@@ -638,6 +638,11 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+require 'lspconfig'.hls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 -- Turn on lsp status information
 require('fidget').setup()
 
