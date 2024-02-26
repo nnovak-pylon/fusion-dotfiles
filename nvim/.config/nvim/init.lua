@@ -210,6 +210,22 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'tex' },
 })
 
+-- Typst
+local typstfiles = vim.api.nvim_create_augroup('typstfiles', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal spell',
+  group = typstfiles,
+  pattern = { 'typst' },
+})
+
+-- Promela
+local promelafiles = vim.api.nvim_create_augroup('promelafiles', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal commentstring=//%s',
+  group = promelafiles,
+  pattern = { 'promela' },
+})
+
 -- Autoformatting commands
 local autoformats = vim.api.nvim_create_augroup(
   'autoformat_settings',
