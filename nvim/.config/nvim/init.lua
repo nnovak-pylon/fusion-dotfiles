@@ -407,6 +407,7 @@ require('nvim-treesitter.configs').setup {
     'vimdoc',
     'c_sharp',
     'haskell',
+    'java',
   },
 
   highlight = { enable = true },
