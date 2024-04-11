@@ -1,3 +1,10 @@
+global !p
+import datetime
+def get_date():
+    now = datetime.datetime.now()
+    return str(now.day) + " " + now.strftime("%B %Y")
+endglobal
+
 snippet article "WriteArticle"
 \documentclass{article}
 
@@ -6,7 +13,7 @@ snippet article "WriteArticle"
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \title{$1}
-\date{$2}
+\date{`!p snip.rv = get_date()`}
 \author{Nicholas Novak}
 
 \begin{document}
