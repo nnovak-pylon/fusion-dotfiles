@@ -17,6 +17,7 @@
     pkgs.neovim
     # pkgs.jdk8
     pkgs.jdk17
+    pkgs.prismlauncher
     pkgs.kitty
     # pkgs.bash
     # pkgs.bashInteractive
