@@ -100,7 +100,7 @@
       "bpytop"
       "typst"
     ];
-    casks = [ "spotify" "wacom-tablet" "inkscape" "xournal-plus-plus" "mactex-no-gui" "mullvadvpn" "slack" "ollama" "skim"];
+    casks = [ "spotify" "wacom-tablet" "inkscape" "xournal-plus-plus" "mactex-no-gui" "mullvadvpn" "slack" "ollama" "skim" "linearmouse"];
     taps = [ "zegervdv/zathura" ];
   };
 
