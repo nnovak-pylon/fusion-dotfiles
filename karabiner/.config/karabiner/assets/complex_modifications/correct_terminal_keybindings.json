@@ -55,6 +55,32 @@
       ]
     },
     {
+      "description": "Remap Control+l to Command+l unless in the terminal",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": ["^net\\.kovidgoyal\\.kitty$"]
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "l",
+              "modifiers": ["command"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
       "description": "Remap Alt+Left/Right unless in terminal",
       "manipulators": [
         {
