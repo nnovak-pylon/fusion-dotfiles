@@ -111,6 +111,12 @@ require('lazy').setup({
     },
   },
 
+  -- Multi-cursor
+  {
+    'mg979/vim-visual-multi',
+    branch = 'master',
+  },
+
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
