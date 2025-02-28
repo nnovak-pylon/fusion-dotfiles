@@ -44,3 +44,4 @@
 font-family = Mononoki
 theme = GruvboxDarkHard
 font-size = 18
+gtk-titlebar = false
