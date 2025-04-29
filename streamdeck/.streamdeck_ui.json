@@ -175,11 +175,11 @@
                         "state": 0,
                         "states": {
                             "0": {
-                                "text": "Whatsapp",
-                                "icon": "/usr/share/icons/hicolor/128x128/apps/whatsapp-nativefier.png",
+                                "text": "",
+                                "icon": "",
                                 "keys": "",
                                 "write": "",
-                                "command": "whatsapp-nativefier",
+                                "command": "",
                                 "brightness_change": 0,
                                 "switch_page": 0,
                                 "switch_state": 0,
