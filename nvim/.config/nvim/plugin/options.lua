@@ -1,6 +1,8 @@
 -- Make line numbers default
 vim.wo.number = true
 
+vim.g.have_nerd_font = false
+
 vim.o.colorcolumn = "80"
 vim.o.background = "dark"
 vim.o.clipboard = "unnamedplus"
@@ -23,11 +25,24 @@ vim.o.gdefault = true
 -- Decrease update time
 vim.o.updatetime = 250
 
+-- Decrease mapped sequence wait time
+vim.o.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.o.splitright = true
+vim.o.splitbelow = true
+
 -- Add a gutter so that things don't jump around
 vim.wo.signcolumn = 'yes'
 
 -- Prevent markdown from collapsing down
 vim.o.foldenable = false
+
+-- Preview substitutions live, as you type!
+vim.o.inccommand = 'split'
+
+-- Show which line your cursor is on
+vim.o.cursorline = true
 
 -- Tabs instead of spaces
 -- :h tabstop is the number of spaces for a tab character
@@ -42,5 +57,3 @@ vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- Disable modelines, this removes some errors when opening text files
 vim.o.modeline = false
-
-vim.o.rtp = vim.o.rtp .. ",~/oxy/current-course"
