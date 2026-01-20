@@ -5,10 +5,22 @@ vim.g.have_nerd_font = false
 
 vim.o.colorcolumn = "80"
 vim.o.background = "dark"
-vim.o.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
+
+vim.g.clipboard = {
+	name = "OSC 52",
+	copy = {
+		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+	},
+	paste = {
+		["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+	},
+}
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -33,13 +45,13 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 
 -- Add a gutter so that things don't jump around
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 -- Prevent markdown from collapsing down
 vim.o.foldenable = false
 
 -- Preview substitutions live, as you type!
-vim.o.inccommand = 'split'
+vim.o.inccommand = "split"
 
 -- Show which line your cursor is on
 vim.o.cursorline = true
@@ -53,7 +65,7 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noinsert,noselect'
+vim.o.completeopt = "menuone,noinsert,noselect"
 
 -- Disable modelines, this removes some errors when opening text files
 vim.o.modeline = false
