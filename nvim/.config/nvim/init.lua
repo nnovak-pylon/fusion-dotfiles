@@ -36,8 +36,8 @@ require("lazy").setup({
 	-- NOTE: First, some plugins that don't require any configuration
 
 	-- -- Git related plugins
-	-- 'tpope/vim-fugitive',
-	-- 'tpope/vim-rhubarb',
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
 	--
 	"preservim/nerdtree",
 
@@ -555,7 +555,7 @@ require("lazy").setup({
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
+		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		config = function()
 			require("typescript-tools").setup({
 				settings = {
@@ -748,7 +748,7 @@ require("lazy").setup({
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs", -- Sets main module to use for opts
+		main = "nvim-treesitter.config", -- Sets main module to use for opts
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 		opts = {
 			ensure_installed = {
