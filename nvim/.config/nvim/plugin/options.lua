@@ -29,6 +29,12 @@ vim.wo.signcolumn = 'yes'
 -- Prevent markdown from collapsing down
 vim.o.foldenable = false
 
+-- Preview substitutions live, as you type!
+vim.o.inccommand = 'split'
+
+-- Show which line your cursor is on
+vim.o.cursorline = true
+
 -- Tabs instead of spaces
 -- :h tabstop is the number of spaces for a tab character
 -- :h expandtab expands tabs into spaces
@@ -42,5 +48,3 @@ vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- Disable modelines, this removes some errors when opening text files
 vim.o.modeline = false
-
-vim.o.rtp = vim.o.rtp .. ",~/oxy/current-course"
