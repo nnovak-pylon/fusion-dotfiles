@@ -676,8 +676,6 @@ require('lazy').setup({
     'SirVer/ultisnips'
   },
 
-  { 'quangnguyen30192/cmp-nvim-ultisnips' },
-
   { 'karolbelina/uxntal.vim' },
 
   { 'kaarmu/typst.vim' },
@@ -1132,14 +1130,6 @@ local servers = {
   hls = {},
 }
 
-
--- Setup neovim lua configuration
-require('neodev').setup()
---
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
@@ -1158,11 +1148,6 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
     }
   end,
-}
-
-require 'lspconfig'.hls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
 }
 
 vim.lsp.inlay_hint.enable()
@@ -1199,51 +1184,3 @@ vim.diagnostic.config {
 
 -- Turn on lsp status information
 require('fidget').setup()
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      --luasnip.lsp_expand(args.body)
-    end,
-  },
-  view = {
-    entries = "native"
-  },
-  mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Tab>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<CR>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    --{ name = 'luasnip' },
-    { name = 'ultisnips' },
-  },
-}
