@@ -5,8 +5,7 @@ vim.g.have_nerd_font = false
 
 vim.o.colorcolumn = "80"
 vim.o.background = "dark"
-vim.opt.clipboard = "unnamedplus"
-
+vim.o.clipboard = "unnamedplus"
 vim.g.clipboard = {
 	name = "OSC 52",
 	copy = {
@@ -18,6 +17,11 @@ vim.g.clipboard = {
 		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
 	},
 }
+
+if vim.g.loaded_clipboard_provider ~= nil then
+	vim.g.loaded_clipboard_provider = nil
+	vim.cmd("runtime autoload/provider/clipboard.vim")
+end
 
 -- Enable mouse mode
 vim.o.mouse = "a"
