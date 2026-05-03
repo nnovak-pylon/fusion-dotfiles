@@ -99,6 +99,7 @@ require("lazy").setup({
 
 					map("K", vim.lsp.buf.hover, "Hover documentation")
 					map("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+					map("<leader>e", vim.diagnostic.open_float, "Open hovering diagnostics")
 
 					-- Rename the variable under your cursor.
 					--  Most Language Servers support renaming across files, etc.
