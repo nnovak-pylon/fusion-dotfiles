@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1",
+    "AWS_REGION": "us-west-1",
+    "AWS_PROFILE": "default",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "us.anthropic.claude-opus-5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "us.anthropic.claude-haiku-5"
+  },
+  "model": "opus",
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(gh *)",
+      "Fetch(*)",
+      "mcp__claude_ai_Linear__get_issue",
+      "mcp__claude_ai_Linear__list_comments",
+      "mcp__claude_ai_Linear__save_comment",
+      "mcp__claude_ai_Linear__save_issue",
+      "mcp__claude_ai_Linear__save_project"
+    ],
+    "deny": [
+      "Bash(gt *)"
+    ],
+    "defaultMode": "auto"
+  },
+  "skillOverrides": {
+    "address-reviewer-feedback": "off",
+    "link-stack-to-linear": "off",
+    "monitor-pr": "off",
+    "new-pr": "off",
+    "new-worktree": "off",
+    "repair-ci-failures": "off",
+    "resolve-merge-conflicts": "off"
+  },
+  "awaySummaryEnabled": false,
+  "tui": "fullscreen",
+  "theme": "dark-ansi",
+  "preferredNotifChannel": "terminal_bell",
+  "skipAutoPermissionPrompt": true,
+  "useAutoModeDuringPlan": true
+}
