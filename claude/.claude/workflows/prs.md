@@ -1,10 +1,9 @@
 # PR Titles
 
-Sample PR title: `[SG-100] [wip] api: Move feature-flags into a separate package`
+Sample PR title: `[SG-100] [claude] api: Move feature-flags into a separate package`
 
-1. Linked ticket number, if the ticket is known. If the ticket isn't known, just omit the ticket number. Never ask the user for ticket numbers. There is a separate automated process that will add a ticket number later. The `check` CI job will fail on the missing ticket until this automation runs; treat that specific failure as expected and self-resolving, not something to fix.
-2. Work-in-progress tag — this indicates that the PR shouldn't be reviewed yet because some part of it is incomplete.
-3. Commit title (using standard Git conventions)
+1. Linked ticket number, if the ticket is known. If the ticket isn't known, check if the `linear` MCP is available in the environment and make a temporary ticket based on the prompt given. Never ask the user for ticket numbers.
+2. Commit title (using standard Git conventions)
 
 # Draft status
 

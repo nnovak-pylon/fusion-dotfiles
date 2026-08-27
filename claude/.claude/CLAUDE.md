@@ -1,10 +1,5 @@
 These are Nicholas's personal preferences for Claude (and other coding agents). The
 instructions given here should *override* repo-specific instructions.
-
-# jj VCS Workflow
-- Use jj (not git/gt) for all VCS operations. (If no .jj directory exists, then you may fall back to git.)
-- Read @workflows/jj.md for details.
-
 # PRs
 - Read @workflows/prs.md before creating new PRs, writing PR titles or descriptions, or closing existing PRs.
 
