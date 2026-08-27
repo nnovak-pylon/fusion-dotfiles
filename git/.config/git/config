@@ -2,7 +2,7 @@
   defaultBranch = master
 [user]
   name = "Nicholas Novak"
-  email = "34256932+NickyBoy89@users.noreply.github.com"
+  email = "nick@pylonlending.com"
 [core]
   editor = vim
 [pull]
