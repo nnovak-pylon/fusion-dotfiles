@@ -44,3 +44,7 @@
 font-family = Mononoki
 theme = Gruvbox Dark Hard
 font-size = 18
+gtk-titlebar = true
+
+clipboard-read = allow
+clipboard-write = allow
