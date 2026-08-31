@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+if ! jj root >/dev/null; then
+  echo >&2 "Failed to get repository root. Is this a jj repo?"
+  exit 1
+fi
+
+read -rd '' JIFFYDIFFY <<JIFFYDIFFY
+_______________________________________________________________________
+______  /__(_)__  __/__  __/____  ____  __ \__(_)__  __/__  __/____  __
+___ _  /__  /__  /_ __  /_ __  / / /_  / / /_  /__  /_ __  /_ __  / / /
+/ /_/ / _  / _  __/ _  __/ _  /_/ /_  /_/ /_  / _  __/ _  __/ _  /_/ /_
+\____/  /_/  /_/    /_/    _\__, / /_____/ /_/  /_/    /_/    _\__, /__
+__________________________ /____/____________________________ /____/___
+
+         ~~~~~~~~ We'll have your diff up in a jiffy! ~~~~~~~~
+JIFFYDIFFY
+echo >&2 "$JIFFYDIFFY"
+
+auto_track_pattern=$(jj config get remotes.origin.auto-track-bookmarks)
+if [[ $auto_track_pattern != *"/*" || $auto_track_pattern == *'"'* ]]; then
+  echo >&2 "$0: Unsupported auto-track-bookmarks setting: $auto_track_pattern"
+  exit 1
+fi
+
+git_push_bookmark_template=$(jj config get templates.git_push_bookmark)
+if [[ $git_push_bookmark_template != '"'$auto_track_pattern ]]; then
+  # If auto-track-bookmarks is 'colin/*', the template must begin with '"colin/'
+  echo >&2 "$0: Unsupported git_push_bookmark template: $git_push_bookmark_template"
+  exit 1
+fi
+
+if ! changes=($(jj log -r stack --no-graph --reversed -T 'change_id ++ "\n"')); then
+  echo >&2 "$0: Failed to list the current stack"
+  exit 1
+fi
+
+# Push any changes that don't have auto-tracked bookmarks yet
+bookmarkless='stack ~ bookmarks("'"$auto_track_pattern"'")'
+if (( $(jj log -r "$bookmarkless" --count) )); then
+  if ! jj git push -c "$bookmarkless"; then
+    echo >&2 "$0: Failed to push changes without bookmarks"
+    exit 1
+  fi
+fi
+
+bookmarks=()
+for change in "${changes[@]}"; do
+  if ! change_bookmarks=($(jj log -r "$change" --no-graph -T 'local_bookmarks.map(|b| b.name() ++ "\n")')); then
+    echo >&2 "$0: Failed to list bookmarks for change $change"
+    exit 1
+  fi
+  for cb in "${change_bookmarks[@]}"; do
+    if [[ $cb == $auto_track_pattern ]]; then
+      bookmarks+=("$cb")
+    fi
+  done
+done
+
+if (( ${#bookmarks[@]} != ${#changes[@]} )); then
+  echo >&2 "$0: Too many bookmarks; aborting"
+  exit 1
+fi
+
+for (( i = ${#bookmarks[@]} - 1; i >= 0; i-- )); do
+  if ! gt untrack "${bookmarks[i]}" --force; then
+    echo >&2 "$0: 'gt untrack' failed; aborting"
+    exit 1
+  fi
+done
+
+# TODO: Figure out the correct base for the stack instead of assuming main.
+# It might be someone else's PR. Might make sense to find the first non-tracked
+# remote bookmark?
+previous=main
+for b in "${bookmarks[@]}"; do
+  if ! gt track "$b" --parent "$previous"; then
+    echo >&2 "$0: 'gt track' failed; aborting"
+    exit 1
+  fi
+  previous=$b
+done
+
+if ! gt submit --draft --no-edit --branch "${bookmarks[-1]}" --force; then
+  echo >&2 "$0: 'gt submit' failed"
+  exit 1
+fi
+
+# Update jj state after the gt-submit
+jj util snapshot
+
