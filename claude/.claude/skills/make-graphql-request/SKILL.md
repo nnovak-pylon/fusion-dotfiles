@@ -1,3 +1,8 @@
+---
+name: make-graphql-request
+description: Make a real GraphQL request against the local braid-api server using the `bru` CLI and the tracked .bru files in ./tools/bruno. Use when the user asks to make an "API request", "real API request", or "GQL request", or to verify a feature by hitting the public GraphQL API directly.
+---
+
 We expose our public API to our customers through GraphQL, so it's extremely valuable to verify features by making a request directly. When the user asks to make an "API request", "real API request", "GQL request", handle them with this skill
 
 We use the `bru` command line tool to make GQL requests, and you'll be able to find a pre-existing set of tracked queries in `./tools/bruno` that can be re-used or modified to make specific requests. If the user asks to make a different kind of API request, create a new `.bru` file in that repository similar to the other requests

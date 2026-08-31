@@ -6,12 +6,8 @@
     "AWS_PROFILE": "default",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-5",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-5",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4.5"
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4-5-20251001"
   },
-  "model": "opus",
-  "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -28,6 +24,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "claude-opus-5-5",
   "skillOverrides": {
     "address-reviewer-feedback": "off",
     "link-stack-to-linear": "off",
@@ -37,8 +34,25 @@
     "repair-ci-failures": "off",
     "resolve-merge-conflicts": "off"
   },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/home/nicholas/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "effortLevel": "high",
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
   "preferredNotifChannel": "terminal_bell",
   "skipAutoPermissionPrompt": true,
