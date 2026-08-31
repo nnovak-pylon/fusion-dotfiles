@@ -41,6 +41,17 @@ require("lazy").setup({
 	--
 	"preservim/nerdtree",
 
+	-- So that I can copy links to github
+	{
+		"linrongbin16/gitlinker.nvim",
+		cmd = "GitLink",
+		opts = {},
+		keys = {
+			{ "<leader>gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link" },
+			{ "<leader>gY", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
+		},
+	},
+
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -336,7 +347,24 @@ require("lazy").setup({
 				-- tsgo = {},
 
 				-- eslint = {},
-				biome = {},
+				-- biome = {},
+
+				oxlint = {
+					root_dir = function(bufnr, on_dir)
+						-- prefer the top-level oxlint config if it exists (monorepo support)
+						local git = vim.fs.root(bufnr, ".git")
+						local markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" }
+						local root = git and vim.fs.root(git, markers) or vim.fs.root(bufnr, markers)
+						if root then
+							on_dir(root)
+						end
+					end,
+					settings = {
+						fixKind = "all",
+					},
+				},
+				--- disable the oxfmt lsp server since we use conform for formatting
+				oxfmt = { enabled = false },
 
 				lua_ls = {
 					-- cmd = { ... },
@@ -753,6 +781,28 @@ require("lazy").setup({
 		branch = "main",
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
 		config = function()
+			-- Register the MiniZinc parser from the local shackle clone.
+			-- Must use a User TSUpdate autocmd because nvim-treesitter clears and
+			-- reloads the parsers module (firing TSUpdate) on every install call.
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "TSUpdate",
+				callback = function()
+					require("nvim-treesitter.parsers").minizinc = {
+						install_info = {
+							path = "/home/pylon/shackle/parsers/tree-sitter-minizinc",
+							queries = "queries",
+						},
+					}
+				end,
+			})
+
+			vim.filetype.add({
+				extension = {
+					mzn = "minizinc",
+					fzn = "minizinc",
+				},
+			})
+
 			-- ensure basic parser are installed
 			local parsers = {
 				"bash",
@@ -763,6 +813,7 @@ require("lazy").setup({
 				"luadoc",
 				"markdown",
 				"markdown_inline",
+				"minizinc",
 				"query",
 				"vim",
 				"vimdoc",
