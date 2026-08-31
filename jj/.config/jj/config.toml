@@ -6,7 +6,7 @@ email = "nick@pylonlending.com"
 
 [ui]
 default-command = "log"
-pager = "less"
+pager = ["less", "-FRX"]
 
 [aliases]
 dup = ["duplicate"]
