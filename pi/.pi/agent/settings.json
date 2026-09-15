@@ -1,0 +1,16 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "defaultProvider": "fireworks-us",
+  "defaultModel": "accounts/fireworks/routers/glm-5p3-flash-us",
+  "defaultThinkingLevel": "high",
+  "enabledModels": [
+    "fireworks/accounts/fireworks/routers/*",
+    "fireworks-us/accounts/fireworks/routers/*"
+  ],
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "npm:pi-subagents",
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ],
+  "theme": "dark"
+}

@@ -1,0 +1,47 @@
+{
+  "mcpServers": {
+    "cclsp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["cclsp"],
+      "env": {
+        "CCLSP_CONFIG_PATH": ".claude/cclsp.json"
+      }
+    },
+    "linear": {
+      "type": "http",
+      "url": "https://mcp.linear.app/mcp"
+    },
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp"
+    },
+    "nx": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["nx-mcp"],
+      "env": {
+        "NX_DAEMON": "false"
+      }
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
+      }
+    },
+    "datadog-mcp": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,error-tracking"
+    },
+    "slack": {
+      "type": "http",
+      "url": "https://mcp.slack.com/mcp"
+    },
+    "vesta": {
+      "type": "http",
+      "url": "https://vesta-mcp.fusion.pylon.ninja/mcp"
+    }
+  }
+}
