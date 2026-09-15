@@ -19,9 +19,7 @@
       "mcp__claude_ai_Linear__save_issue",
       "mcp__claude_ai_Linear__save_project"
     ],
-    "deny": [
-      "Bash(gt *)"
-    ],
+    "deny": [],
     "defaultMode": "auto"
   },
   "model": "claude-opus-5-5",
@@ -47,6 +45,11 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/claude-status.sh",
+    "padding": 0
   },
   "effortLevel": "high",
   "awaySummaryEnabled": false,
