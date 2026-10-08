@@ -11,6 +11,12 @@ instructions given here should *override* repo-specific instructions.
 # Writing comments/PRs/tickets as Claude via the user's accounts
 - Read @workflows/writing-as-claude.md before writing any text that will appear with the user's identity (e.g. GitHub, Linear, Slack).
 
+## When you ask me for a plan:
+1. Read `~/.pi/agent/skills/plan-first/SKILL.md` completely
+2. Follow the Plan-First Workflow EXACTLY (phases 1–5)
+3. Create TODO.md in the project directory
+4. Wait for my explicit confirmation ("YES")
+5. Execute ONLY the confirmed tasks
 # Coding guidelines
 
 ## Comments
