@@ -781,7 +781,7 @@ require("lazy").setup({
 		branch = "main",
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
 		config = function()
-			-- Register the MiniZinc parser from the local shackle clone.
+			-- Register the vendored MiniZinc parser (see parsers/tree-sitter-minizinc/README.md).
 			-- Must use a User TSUpdate autocmd because nvim-treesitter clears and
 			-- reloads the parsers module (firing TSUpdate) on every install call.
 			vim.api.nvim_create_autocmd("User", {
@@ -789,7 +789,7 @@ require("lazy").setup({
 				callback = function()
 					require("nvim-treesitter.parsers").minizinc = {
 						install_info = {
-							path = "/home/pylon/shackle/parsers/tree-sitter-minizinc",
+							path = vim.fn.stdpath("config") .. "/parsers/tree-sitter-minizinc",
 							queries = "queries",
 						},
 					}
