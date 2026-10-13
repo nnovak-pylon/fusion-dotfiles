@@ -12,3 +12,4 @@ On a 10 minute loop:
 1. Check for CI failures, and make any changes necessary to resolve those CI failures
 2. Watch the comments on the PR, and if anyone makes them, make any changes necessary to resolve their concerns and resolve their comments
 3. If any user requests changes, once you're done addressing their changes, re-request them for review
+4. Make sure Greptile gets a 5/5, otherwise it will require a manual review from the queue. NEVER assume this requires manual review, and ALWAYS go for a 5/5
