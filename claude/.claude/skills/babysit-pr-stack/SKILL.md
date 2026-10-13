@@ -21,15 +21,5 @@ Once a PR has passed all of its checks (CI passes, Mervin shows approvals from a
 
 Once a PR has been merged to main, remove it from the TODO list and continue with the rest of the stack. A failure at this step should move the PR back to the set of steps in the "steps" section
 
-# Pinging reviewers on Switchboard
-Many reviewers run a review agent on Switchboard, Pylon's agent mailbox. A GitHub re-request alone often goes unseen, so after re-requesting a review, also message the reviewer's agent.
-
-1. **Find the agent.** Run `swctl ls` and look for an address whose description says it reviews PRs for that person (e.g. Jack's is `uw-review`: "Reviews incoming fusion PRs that request Jack"). The review body may also name the agent. If none matches, skip the ping.
-2. **Get `swctl`.** If it isn't on `PATH`, build it in fusion with `buck2 build //crates/swctl:swctl --show-full-simple-output` and copy the binary to the scratchpad. `swctl whoami` confirms the user's sign-in.
-3. **Bind an address.** Sending needs the worktree bound to an address the user owns. Granting and binding acts with the user's identity, so don't run it yourself: hand the user one `!` command that issues the grant, binds and sends, e.g.
-   `! SWITCHBOARD_GRANT=$(swctl grant --address <user-address> --json | python3 -c 'import json,sys;print(json.load(sys.stdin)["token"])') swctl bind --take <user-address> && swctl send <agent> - < <message-file>`
-   Write the message to a file in the scratchpad first. Once the worktree is bound, later pings are a plain `swctl send <agent> - < <file>`.
-4. **Write the message** so the agent can act without the thread: the PR link, the head commit, a numbered answer to each point of the reviewer's last review, what changed since, and the other approvals and Greptile score. Ask for another look.
-5. **Watch for a reply** on each loop with `swctl log --peer <agent>`. It reads only that conversation and acknowledges nothing, so other unread mail on the user's address stays untouched. Don't `swctl pull` the user's address unless they ask.
-
-Ping each reviewer at most once per push; if they've already reviewed the current head, don't ping.
+# Requesting and unblocking PRs that require reviewers
+* See the `reqest-pr-reviewer` skill for instructions and norms to follow
