@@ -3,8 +3,9 @@ name: babysit-pr-stack
 description: Skill that defines how to babysit, watch, monitor, or otherwise ensure a set of pull requests get merged. Call this whenever the user requests any of these things
 ---
 ## Prerequisites
-1. Make sure all the PRs in the stack are out of the "Draft" status, or get approval using the "Question" tool, asking "This stack contains PRs that are still in the draft status, do you want to move them out?" (yes/no)
-2. Make sure the changes have been submitted to GitHub and aren't sitting unmerged in the local tree
+1. Find all the PRs included in the "current stack". If Graphite is available, you can find this with `gt ls --stack`
+2. Make sure all the PRs in the stack are out of the "Draft" status, or get approval using the "Question" tool, asking "This stack contains PRs that are still in the draft status, do you want to move them out?" (yes/no)
+3. Make sure the changes have been submitted to GitHub and aren't sitting unmerged in the local tree
 
 # Steps
 On a 10 minute loop:
