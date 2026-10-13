@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -u
+
+namespace=grafana
+secret=grafana-machine-dashboard-verifier
+
+client_id=$(kubectl -n "$namespace" get secret "$secret" -o jsonpath='{.data.client_id}' | base64 -d)
+client_secret=$(kubectl -n "$namespace" get secret "$secret" -o jsonpath='{.data.client_secret}' | base64 -d)
+issuer=$(kubectl -n "$namespace" get secret "$secret" -o jsonpath='{.data.issuer}' | base64 -d)
+project_id=$(kubectl -n "$namespace" get secret "$secret" -o jsonpath='{.data.project_id}' | base64 -d)
+
+if [[ -z "$client_id" || -z "$client_secret" || -z "$issuer" || -z "$project_id" ]]; then
+	printf >&2 'grafana-mcp-token: could not read %s/%s via kubectl\n' "$namespace" "$secret"
+	exit 1
+fi
+
+token=$(curl -sf -X POST "${issuer}/oauth/v2/token" \
+	--data-urlencode grant_type=client_credentials \
+	--data-urlencode "client_id=${client_id}" \
+	--data-urlencode "client_secret=${client_secret}" \
+	--data-urlencode "scope=openid urn:zitadel:iam:org:project:id:${project_id}:aud" \
+	| jq -r .access_token)
+
+if [[ -z "$token" || "$token" == null ]]; then
+	printf >&2 'grafana-mcp-token: failed to mint a Zitadel machine bearer\n'
+	exit 1
+fi
+
+export GRAFANA_URL="${GRAFANA_URL:-https://grafana.fusion.pylon.ninja}"
+export GRAFANA_SERVICE_ACCOUNT_TOKEN="$token"
+
+exec uvx mcp-grafana
