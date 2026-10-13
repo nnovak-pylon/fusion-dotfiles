@@ -7,7 +7,7 @@ Sample PR title: `[SG-100] [claude] api: Move feature-flags into a separate pack
 
 # Draft status
 
-Always create PRs as drafts. Never automatically move PRs out of draft status. Nicholas will promote PRs out of draft status when he is ready for them to be reviewed by others.
+Never create PRs as drafts unless specifically asked for
 
 # PR Descriptions
 
