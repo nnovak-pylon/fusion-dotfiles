@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+#
+# Removes herdr git worktrees (~/.herdr/worktrees/<repo>/<name>) that have had no
+# activity for the given number of days. Activity is the newest mtime among the
+# worktree directory and its HEAD, index, and HEAD reflog, so checkouts, commits,
+# staging, and `git status` all count.
+#
+# Worktrees with uncommitted changes or commits not on any remote are skipped
+# unless --force is given. Branches are left in place.
+
+set -u
+
+usage() {
+  cat >&2 <<EOF
+Usage: ${0##*/} [-n|--dry-run] [-f|--force] [-d|--days N]
+
+  -n, --dry-run   Show what would be removed without removing anything
+  -f, --force     Also remove worktrees with uncommitted or unpushed work
+  -d, --days N    Minimum days of inactivity (default: 7)
+
+Worktree root: \${HERDR_WORKTREES:-~/.herdr/worktrees}
+EOF
+}
+
+dry_run=0
+force=0
+days=7
+while (( $# )); do
+  case $1 in
+    -n|--dry-run) dry_run=1 ;;
+    -f|--force) force=1 ;;
+    -d|--days)
+      if [[ ! ${2-} =~ ^[0-9]+$ ]]; then
+        printf >&2 '%s: --days requires a non-negative integer\n' "${0##*/}"
+        exit 2
+      fi
+      days=$2
+      shift
+      ;;
+    -h|--help) usage; exit 0 ;;
+    *) usage; exit 2 ;;
+  esac
+  shift
+done
+
+root=${HERDR_WORKTREES:-$HOME/.herdr/worktrees}
+if [[ ! -d $root ]]; then
+  printf >&2 '%s: %s does not exist\n' "${0##*/}" "$root"
+  exit 1
+fi
+
+cutoff=$(( $(date +%s) - days * 86400 ))
+removed=0
+skipped=0
+failed=0
+
+for wt in "$root"/*/*/; do
+  wt=${wt%/}
+  name=${wt#"$root"/}
+  [[ -f $wt/.git ]] || continue
+
+  gitdir=$(sed -n 's/^gitdir: //p' "$wt/.git")
+  if [[ ! -d $gitdir ]]; then
+    printf 'skip    %s (orphaned: %s is missing; run `git worktree prune` in the parent repo)\n' "$name" "$gitdir"
+    (( skipped++ ))
+    continue
+  fi
+
+  last_active=$(stat -c %Y "$wt" "$gitdir"/{HEAD,index,logs/HEAD} 2>/dev/null | sort -n | tail -1)
+  (( last_active < cutoff )) || continue
+  last_active_date=$(date -d "@$last_active" +%F)
+
+  if (( !force )); then
+    if [[ -n $(git -C "$wt" status --porcelain 2>/dev/null) ]]; then
+      printf 'skip    %s (last active %s; uncommitted changes)\n' "$name" "$last_active_date"
+      (( skipped++ ))
+      continue
+    fi
+    if [[ -n $(git -C "$wt" log -1 --format=%h HEAD --not --remotes 2>/dev/null) ]]; then
+      printf 'skip    %s (last active %s; unpushed commits)\n' "$name" "$last_active_date"
+      (( skipped++ ))
+      continue
+    fi
+  fi
+
+  if (( dry_run )); then
+    printf 'would remove %s (last active %s)\n' "$name" "$last_active_date"
+    (( removed++ ))
+    continue
+  fi
+
+  main_wt=$(git -C "$wt" worktree list --porcelain | sed -n '1s/^worktree //p')
+  force_args=()
+  (( force )) && force_args=(--force)
+  if git -C "$main_wt" worktree remove "${force_args[@]}" "$wt"; then
+    printf 'removed %s (last active %s)\n' "$name" "$last_active_date"
+    (( removed++ ))
+  else
+    printf >&2 'failed  %s\n' "$name"
+    (( failed++ ))
+  fi
+done
+
+if (( !dry_run )); then
+  find "$root" -mindepth 1 -maxdepth 1 -type d -empty -delete
+fi
+
+verb=Removed
+(( dry_run )) && verb='Would remove'
+printf '\n%s %d worktree(s); skipped %d; failed %d (inactive for %d+ days)\n' \
+  "$verb" "$removed" "$skipped" "$failed" "$days"
+(( failed == 0 ))
