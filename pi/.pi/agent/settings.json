@@ -12,5 +12,6 @@
     "npm:pi-subagents",
     "npm:@juicesharp/rpiv-ask-user-question"
   ],
+  "skills": ["~/.claude/skills"],
   "theme": "dark"
 }
