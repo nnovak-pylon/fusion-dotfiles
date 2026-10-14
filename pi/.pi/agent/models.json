@@ -7,6 +7,14 @@
       "authHeader": true,
       "models": [
         {
+          "id": "accounts/fireworks/routers/glm-5p3-us",
+          "name": "GLM 5.3 US"
+        },
+        {
+          "id": "accounts/fireworks/routers/kimi-k3-us",
+          "name": "Kimi K3 US"
+        },
+        {
           "id": "accounts/fireworks/routers/glm-5p3-flash-us",
           "name": "GLM 5.3 Flash US"
         },
