@@ -1,5 +1,11 @@
 # Git aliases
-alias gs="git status"
+gs() {
+  if jj root 2>/dev/null; then
+    jj show -s
+  else
+    git status
+  fi
+}
 
 # Calculator
 alias k="kalker"
